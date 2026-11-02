@@ -7,7 +7,8 @@ void yyerror(const char *message);
 %}
 
 %token NUMBER
-%left '+'
+%left '+''-'
+%left '*''/'
 
 %%
 
@@ -19,6 +20,21 @@ expression:
       NUMBER
     | expression '+' expression
         { $$ = $1 + $3; }
+    | expression '-' expression
+	{ $$ = $1 - $3; }
+    | expression '*' expression
+	{ $$ = $1 * $3; }
+    | '('expression')' 
+	{$$ = $2;}
+    | expression '/' expression
+    {
+        if ($3 == 0) {
+            yyerror("division by zero");
+            YYABORT;
+        }
+
+        $$ = $1 / $3;
+    }
 ;
 
 %%

@@ -14,8 +14,13 @@
     return NUMBER;
 }
 
-"+"       { return '+'; }
 
+"+"    { return '+'; }
+"-"    { return '-'; }
+"*"    { return '*'; }
+"/"    { return '/'; }
+"("    { return '('; }
+")"    { return ')'; }
 [ \t\n]+  { /* Ignore whitespace */ }
 
 .         { return yytext[0]; }
